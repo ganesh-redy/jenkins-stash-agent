@@ -2,8 +2,8 @@ pipeline {
     agent any 
     environment{
         NAME= "ganesh"
-        URL= ""
-        DIR =""
+        URL= "https://github.com/ganesh-redy/jenkins-stash-agent.git"
+        DIR ="jenkins-stash-agent"
     }
     stages{
         stage ("mvn clean"){
