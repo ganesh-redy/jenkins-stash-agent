@@ -15,7 +15,7 @@ pipeline {
                 stash includes: 'simple-java-maven-app-1.0-SNAPSHOT.jar', name: 'myjar'
             }
         }
-         stage("Build Docker Image") {
+         stage("check path ") {
                     agent {
                         label 'agent'
                     }
