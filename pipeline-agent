@@ -2,8 +2,8 @@ pipeline {
     agent any 
     environment{
         NAME= "ganesh"
-        URL= "https://github.com/ganesh-redy/jenkins-stash-agent.git"
-        DIR ="jenkins-stash-agent"
+        GIT_URL= "https://github.com/ganesh-redy/jenkins-stash-agent.git"
+        DIR1 ="jenkins-stash-agent"
     }
     stages{
         stage ("mvn clean"){
@@ -24,8 +24,8 @@ pipeline {
                 unstash 'myjar'
 
                 sh """ 
-                    git clone ${URL}
-                    cp ${DIR}/Dockerfile .
+                    git clone ${GIT_URL}
+                    cp ${DIR1}/Dockerfile .
                     
 
                         docker build -t java1 .
