@@ -1,35 +1,31 @@
 pipeline {
     agent any 
-    environment{
-        NAME= "ganesh"
-        GIT_URL= "https://github.com/ganesh-redy/jenkins-stash-agent.git"
-        DIR1 ="jenkins-stash-agent"
+    environment {
+        NAME = "ganesh"
+        GIT_URL = "https://github.com/ganesh-redy/jenkins-stash-agent.git"
+        DIR = "jenkins-stash-agent"
     }
-    stages{
-        stage ("mvn clean"){
+    stages {
+        stage("mvn clean") {
             steps {
-                sh """ 
-                     mvn clean install
-                      
-
-                """
+                sh ''' 
+                    mvn clean install
+                '''
                 stash includes: 'target/*.jar', name: 'myjar'
             }
         }
-        stage {
-            agent{
+
+        stage("Build Docker Image") {
+            agent {
                 label 'agent1'
             }
             steps {
                 unstash 'myjar'
-
-                sh """ 
+                sh ''' 
                     git clone ${GIT_URL}
-                    cp ${DIR1}/Dockerfile .
-                    
-
-                        docker build -t java1 .
-                """
+                    cp ${DIR}/Dockerfile .
+                    docker build -t java1 .
+                '''
             }
         }
     }
