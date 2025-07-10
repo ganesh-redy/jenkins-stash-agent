@@ -12,7 +12,7 @@
     <description>Spring Boot Java 17 Application</description>
 
     <properties>
-        <java.version>21</java.version>
+        <java.version>17</java.version>
         <spring.boot.version>2.7.5</spring.boot.version>
     </properties>
 
