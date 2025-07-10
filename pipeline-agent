@@ -13,7 +13,7 @@ pipeline {
                       
 
                 """
-                stash includes: 'target/*.jar' name: 'myjar'
+                stash includes: 'target/*.jar', name: 'myjar'
             }
         }
         stage {
