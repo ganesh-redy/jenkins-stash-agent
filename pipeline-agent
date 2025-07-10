@@ -10,10 +10,24 @@ pipeline {
             steps {
                 sh ''' 
                     mvn clean install
-                '''
-                stash includes: 'target/*.jar', name: 'myjar'
+                    cp target/simple-java-maven-app-1.0-SNAPSHOT.jar .
+                 '''
+                stash includes: 'simple-java-maven-app-1.0-SNAPSHOT.jar', name: 'myjar'
             }
         }
+         stage("Build Docker Image") {
+                    agent {
+                        label 'agent'
+                    }
+                    steps {
+                        
+                        sh ''' 
+                            pwd
+                             ls
+        
+                        '''
+                    }
+                }
 
         stage("Build Docker Image") {
             agent {
@@ -23,6 +37,8 @@ pipeline {
                 unstash 'myjar'
                 sh ''' 
                     git clone ${GIT_URL}
+                     ls
+
                     cp ${DIR}/Dockerfile .
                     docker build -t java1 .
                 '''
